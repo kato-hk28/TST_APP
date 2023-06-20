@@ -7,5 +7,6 @@
     <string name="right_button">右回転</string>
     <string name="left_button">左回転</string>
     <string name="throw_button">投げる</string>
+    <string name="stop_button">停止</string>
 
 </resources>

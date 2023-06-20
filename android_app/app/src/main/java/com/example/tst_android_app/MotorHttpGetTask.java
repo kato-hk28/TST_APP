@@ -12,21 +12,22 @@ import java.net.URL;
 public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     private final Activity mParentActivity;
-    private final String DEFAULTUAL;
+//    private final String DEFAULTUAL = "http://192.168.1.89/~pi/motorDriver.php?";
+    private final String DEFAULTUAL = "http://192.168.11.24/~pi/motorDriver.php?";
     private String uri = null;
     private ProgressDialog mDialog = null;
+    private Listener listener;
 
-    public MotorHttpGetTask(Activity mParentActivity, String defaultual) {
+    public MotorHttpGetTask(Activity mParentActivity) {
         this.mParentActivity = mParentActivity;
-        DEFAULTUAL = defaultual;
     }
     //タスク開始時
     @Override
     protected void onPreExecute(){
         Log.d("MotorHttpGetTask", "wlog onPreExecute()");
-        mDialog = new ProgressDialog(mParentActivity);
-        mDialog.setMessage("通信中・・・");
-        mDialog.show();
+//        mDialog = new ProgressDialog(mParentActivity);
+//        mDialog.setMessage("通信中・・・");
+//        mDialog.show();
     }
 
 
@@ -35,7 +36,7 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
     protected Void doInBackground(Integer... arg0){
         Log.d("MotorHttpGetTask", "wlog doInBackground()");
         //実行するURLスクリプト
-        uri = DEFAULTUAL + "num=" + arg0[0].toString() + "&stat=" + arg0[1].toString();
+        uri = DEFAULTUAL + "state=" + arg0[0].toString();
         exec_get();
         return null;
     }
@@ -44,7 +45,10 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
     @Override
     protected void onPostExecute(Void result){
         Log.d("MotorHttpGetTask", "wlog onPostExecute()");
-        mDialog.dismiss();
+        if (listener != null) {
+            listener.onSuccess();
+        }
+//        mDialog.dismiss();
     }
 
     private String exec_get(){
@@ -89,5 +93,12 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
             }
         }
         return src;
+    }
+
+    void setListener(Listener listener) {
+        this.listener = listener;
+    }
+    interface Listener {
+        boolean onSuccess();
     }
 }

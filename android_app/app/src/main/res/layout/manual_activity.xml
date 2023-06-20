@@ -6,21 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/preview_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
-
     <Button
         android:id="@+id/left_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="464dp"
         android:layout_marginTop="272dp"
-        android:text="@string/left_button"
         android:autoSizeTextType="uniform"
+        android:text="@string/left_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="272dp"
         android:layout_marginEnd="24dp"
-        android:text="@string/right_button"
         android:autoSizeTextType="uniform"
+        android:text="@string/right_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="224dp"
         android:layout_marginEnd="100dp"
-        android:text="@string/forward_button"
         android:autoSizeTextType="uniform"
+        android:text="@string/forward_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="320dp"
         android:layout_marginEnd="104dp"
-        android:text="@string/backward_button"
         android:autoSizeTextType="uniform"
+        android:text="@string/backward_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,8 +54,33 @@
         android:id="@+id/throw_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/throw_button"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="272dp"
         android:autoSizeTextType="uniform"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="272dp" />
+        android:text="@string/throw_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stop_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="12dp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/stop_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/control_text"
+        android:layout_width="152dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="60dp"
+        android:text=""
+        android:autoSizeTextType="uniform"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
