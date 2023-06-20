@@ -83,6 +83,8 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
         }finally {
             Log.d("MotorHttpGetTask", "disconnect");
             try{
+
+
                 if (http != null){
                     http.disconnect();
                 }

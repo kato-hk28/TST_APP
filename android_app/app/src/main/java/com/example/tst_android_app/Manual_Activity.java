@@ -103,7 +103,6 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         mControlText.setText("STATE = "+state);
         return false;
     }
-
     private MotorHttpGetTask.Listener createListener() {
         return new MotorHttpGetTask.Listener() {
             @Override
