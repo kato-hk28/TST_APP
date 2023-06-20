@@ -1,7 +1,0 @@
-train: trashCans/train
-val: trashCans/val
-test: trashCans/test/
-
-nc: 1
-
-names: ['trashCan']
