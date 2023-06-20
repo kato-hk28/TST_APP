@@ -19,8 +19,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     public static int LEFT = 2;
     public static int RIGHT = 3;
     public static int STOP = 4;
-
-    private int state;
+    private int state = STOP;
     private MotorHttpGetTask task;
 
     @Override
@@ -37,17 +36,6 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         mButton_left = (Button) findViewById(R.id.left_button);
         mButton_right = (Button) findViewById(R.id.right_button);
         mButton_throw = (Button) findViewById(R.id.throw_button);
-        //
-//        mButton_forwrd.setOnClickListener(this);
-//        mButton_backward.setOnClickListener(this);
-//        mButton_left.setOnClickListener(this);
-//        mButton_right.setOnClickListener(this);
-//        mButton_throw.setOnClickListener(this);
-//
-//        mButton_forwrd.setOnLongClickListener(this);
-//        mButton_backward.setOnLongClickListener(this);
-//        mButton_left.setOnLongClickListener(this);
-//        mButton_right.setOnLongClickListener(this);
 
         mButton_forwrd.setOnTouchListener(this);
         mButton_backward.setOnTouchListener(this);
@@ -59,16 +47,9 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     }
 
     @Override
-    protected void onDestroy() {
-        task.setListener(null);
-        super.onDestroy();
-    }
-
-    @Override
     public boolean onTouch(View v, MotionEvent event) {
         Log.d("onTouch", "plog onTouchEvent is called.");
         switch(event.getAction() & MotionEvent.ACTION_MASK){
-            case MotionEvent.ACTION_MOVE:
             case MotionEvent.ACTION_DOWN:
                 if (event.getPointerCount() == 1) {
                     if (v.getId() == R.id.forward_button) {
@@ -90,26 +71,22 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
 
                     }
                 }
+                TaskCreate(state);
                 break;
             case MotionEvent.ACTION_UP:
                 Log.d("onTouch", "plog STATE=STOP");
                 state = STOP;
+                TaskCreate(state);
                 break;
         }
+        return false;
+    }
+
+    private void TaskCreate(int state){
         task = new MotorHttpGetTask(this);
         // Listenerを設定
         //task.setListener(createListener());
         task.execute(state);
         mControlText.setText("STATE = "+state);
-        return false;
-    }
-
-    private MotorHttpGetTask.Listener createListener() {
-        return new MotorHttpGetTask.Listener() {
-            @Override
-            public boolean onSuccess() {
-                return true;
-            }
-        };
     }
 }
