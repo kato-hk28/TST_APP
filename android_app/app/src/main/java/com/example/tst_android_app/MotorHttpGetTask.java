@@ -12,12 +12,10 @@ import java.net.URL;
 public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     private final Activity mParentActivity;
-//    private final String DEFAULTUAL = "http://192.168.1.89/~pi/motorDriver.php?";
-    private final String DEFAULTUAL = "http://192.168.11.24/~pi/motorDriver.php?";
+    private final String DEFAULTUAL = "http://192.168.1.89/~pi/motorDriver.php?";
+    //private final String DEFAULTUAL = "http://192.168.11.24/~pi/motorDriver.php?";
     private String uri = null;
     private ProgressDialog mDialog = null;
-    private Listener listener;
-
     public MotorHttpGetTask(Activity mParentActivity) {
         this.mParentActivity = mParentActivity;
     }
@@ -45,9 +43,6 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
     @Override
     protected void onPostExecute(Void result){
         Log.d("MotorHttpGetTask", "wlog onPostExecute()");
-        if (listener != null) {
-            listener.onSuccess();
-        }
 //        mDialog.dismiss();
     }
 
@@ -95,12 +90,5 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
             }
         }
         return src;
-    }
-
-    void setListener(Listener listener) {
-        this.listener = listener;
-    }
-    interface Listener {
-        boolean onSuccess();
     }
 }
