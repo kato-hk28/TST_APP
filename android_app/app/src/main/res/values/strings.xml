@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TST_Android_APP</string>
+    <string name="auto_button">自動操縦モード</string>
+    <string name="manual_button">手動操縦モード</string>
+    <string name="forward_button">前</string>
+    <string name="backward_button">後</string>
+    <string name="right_button">右回転</string>
+    <string name="left_button">左回転</string>
+    <string name="throw_button">投げる</string>
+    <string name="stop_button">停止</string>
+
+</resources>
