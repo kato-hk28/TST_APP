@@ -6,19 +6,21 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Manual_Activity extends AppCompatActivity implements View.OnTouchListener{
 
-    private Button mButton_forwrd, mButton_backward, mButton_left, mButton_right, mButton_throw;
+    private ImageButton mButton_forwrd, mButton_backward, mButton_left, mButton_right, mButton_stop, mButton_throw;
     private TextView mControlText;
     public static int FORWARD = 0;
     public static int BACKWARD = 1;
     public static int LEFT = 2;
     public static int RIGHT = 3;
     public static int STOP = 4;
+    public static int THROW = 5;
     private int state = STOP;
     private MotorHttpGetTask task;
 
@@ -31,16 +33,18 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // ボタンの定義してonClick, onLongClickListenerをつける
-        mButton_forwrd = (Button) findViewById(R.id.forward_button);
-        mButton_backward = (Button) findViewById(R.id.backward_button);
-        mButton_left = (Button) findViewById(R.id.left_button);
-        mButton_right = (Button) findViewById(R.id.right_button);
-        mButton_throw = (Button) findViewById(R.id.throw_button);
+        mButton_forwrd = (ImageButton) findViewById(R.id.forward_button);
+        mButton_backward = (ImageButton) findViewById(R.id.backward_button);
+        mButton_left = (ImageButton) findViewById(R.id.left_button);
+        mButton_right = (ImageButton) findViewById(R.id.right_button);
+        mButton_stop = (ImageButton) findViewById(R.id.stop_button);
+        mButton_throw = (ImageButton) findViewById(R.id.throw_button);
 
         mButton_forwrd.setOnTouchListener(this);
         mButton_backward.setOnTouchListener(this);
         mButton_left.setOnTouchListener(this);
         mButton_right.setOnTouchListener(this);
+        mButton_stop.setOnTouchListener(this);
         mButton_throw.setOnTouchListener(this);
 
         mControlText = (TextView) findViewById(R.id.control_text);
@@ -67,6 +71,9 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
                     }  else if (v.getId() == R.id.stop_button) {
                         Log.d("onTouch", "plog STATE=STOP");
                         state = STOP;
+                    } else if (v.getId() == R.id.throw_button) {
+                        Log.d("onTouch", "plog STATE=STOP");
+                        state = THROW;
                     } else {
 
                     }
