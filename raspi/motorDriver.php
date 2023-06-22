@@ -1,4 +1,3 @@
-
 <!-- /home/pi/public_html 直下に配置する
 ADDRESS,PASSWORDを適切な値に変更する -->
 
