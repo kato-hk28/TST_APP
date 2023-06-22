@@ -1,20 +1,26 @@
 package com.example.tst_android_app;
 
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.longdo.mjpegviewer.MjpegView;
+//　By https://github.com/perthcpe23/android-mjpeg-view
+
 public class Manual_Activity extends AppCompatActivity implements View.OnTouchListener{
 
     private ImageButton mButton_forwrd, mButton_backward, mButton_left, mButton_right, mButton_stop, mButton_throw;
     private TextView mControlText;
+    private MjpegView mv;
     public static int FORWARD = 0;
     public static int BACKWARD = 1;
     public static int LEFT = 2;
@@ -23,6 +29,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     public static int THROW = 5;
     private int state = STOP;
     private MotorHttpGetTask task;
+    private final String DEFAULTURL = "http://192.168.1.89:8080/?action=stream";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,10 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
 
         //windowをフルスクリーンモードにする
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //ラズパイ上のカメラからStream配信を取得
+        mv = (MjpegView) findViewById(R.id.mjpegview);
+        StartStream(mv);
 
         // ボタンの定義してonClick, onLongClickListenerをつける
         mButton_forwrd = (ImageButton) findViewById(R.id.forward_button);
@@ -91,9 +102,15 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
 
     private void TaskCreate(int state){
         task = new MotorHttpGetTask(this);
-        // Listenerを設定
-        //task.setListener(createListener());
         task.execute(state);
         mControlText.setText("STATE = "+state);
+    }
+
+    private void StartStream(MjpegView viewer){
+        viewer.setMode(MjpegView.MODE_FIT_WIDTH);
+        viewer.setAdjustHeight(true);
+        viewer.setSupportPinchZoomAndPan(true);
+        viewer.setUrl(DEFAULTURL);
+        viewer.startStream();
     }
 }
