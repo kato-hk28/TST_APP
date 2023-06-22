@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "TST_Android_APP"
-include ':app'
+include ':app', ':mjpegviewer'
