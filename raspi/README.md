@@ -1,6 +1,6 @@
 # Raspberry Pi
-*.phpファイルは　~/pi/public_html 直下へ配置
-*start_stream.sh は /home/pi/home/pi/mjpg-streamer/mjpg-streamer-experimental 直下へ配置
+* .phpファイルは　~/pi/public_html 直下へ配置
+* start_stream.sh は /home/pi/home/pi/mjpg-streamer/mjpg-streamer-experimental 直下へ配置
 
 ## mjpg_streamer
 Raspberry Pi Camera の映像をWeb配信できるアプリケーション  
