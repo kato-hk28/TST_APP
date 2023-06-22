@@ -40,10 +40,7 @@ int main(int argc, char *argv[]){
 	pinMode(ECHO_PIN, INPUT);
 	pinMode(TRIGER_PIN, OUTPUT);
 
-	while(1){
-		distance = distanceMeasure();
-		printf("%0.1f cm\n", distance);
-		delay(100);
-	}
+	distance = distanceMeasure();
+	printf("%0.1f", distance);
 	return 0;
 }
