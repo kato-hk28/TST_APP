@@ -29,7 +29,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     public static int THROW = 5;
     private int state = STOP;
     private MotorHttpGetTask task;
-    private final String DEFAULTURL = "http://192.168.1.89:8080/?action=stream";
+    private final String DEFAULTURL = "http://192.168.11.24:8080/?action=stream";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
