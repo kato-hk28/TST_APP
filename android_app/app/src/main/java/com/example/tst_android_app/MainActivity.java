@@ -16,16 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button AutoModeButton = (Button) findViewById(R.id.auto_button);
-        AutoModeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("main", "plog auto_button onClick");
-                Intent intent = new Intent(getApplicationContext(), Auto_Activity.class);
-                startActivity(intent);
-            }
-        });
-
         Button ManualModeButton = (Button) findViewById(R.id.manual_button);
         ManualModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
