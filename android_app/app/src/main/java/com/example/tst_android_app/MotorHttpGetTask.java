@@ -12,8 +12,10 @@ import java.net.URL;
 public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     private final Activity mParentActivity;
-    private final String DEFAULTUAL = "http://192.168.1.89/~pi/motorDriver.php?";
-    //private final String DEFAULTUAL = "http://192.168.11.24/~pi/motorDriver.php?";
+    //private final String DEFAULTUAL = "http://192.168.1.89/~pi/motorDriver.php?";
+    private final String DEFAULTUAL = "http://192.168.11.24" +
+            "" +
+            "/~pi/motorDriver.php?";
     private String uri = null;
     private ProgressDialog mDialog = null;
     public MotorHttpGetTask(Activity mParentActivity) {
@@ -61,25 +63,11 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
             http.connect();
             // データを取得
             in = http.getInputStream();
-            // ソースを読み出す
-            byte[] line = new byte[1024];
-            int size;
-            while(true){
-                Log.d("MotorHttpGetTask", "while read");
-                size = in.read(line);
-                if (size <= 0){
-                    break;
-                }
-                src += new String(line);
-            }
-            Log.d("MotorHttpGetTask", "out while");
         }catch (Exception e){
             e.printStackTrace();
         }finally {
             Log.d("MotorHttpGetTask", "disconnect");
             try{
-
-
                 if (http != null){
                     http.disconnect();
                 }

@@ -73,13 +73,13 @@ int main(int argc, char *argv[]) {
       digitalWrite(SERVO_right0, 1);
       digitalWrite(SERVO_right1, 0);
       digitalWrite(SERVO_left0, 0);
-      digitalWrite(SERVO_left1, 0);
+      digitalWrite(SERVO_left1, 1);
       printf("ACTION_LEFT\n");
       break;
     case action_RIGHT:
       // 右旋回
       // 左のモーターのみを動かす（または左モーター正回転,右モーター負回転）
-      digitalWrite(SERVO_right0, 0);
+      digitalWrite(SERVO_right0, 1);
       digitalWrite(SERVO_right1, 0);
       digitalWrite(SERVO_left0, 1);
       digitalWrite(SERVO_left1, 0);
