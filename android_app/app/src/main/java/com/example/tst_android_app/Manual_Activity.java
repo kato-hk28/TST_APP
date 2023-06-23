@@ -2,6 +2,7 @@ package com.example.tst_android_app;
 
 import android.graphics.Camera;
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.longdo.mjpegviewer.MjpegView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 //　By https://github.com/perthcpe23/android-mjpeg-view
 
 public class Manual_Activity extends AppCompatActivity implements View.OnTouchListener{
@@ -29,7 +33,8 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     public static int THROW = 5;
     private int state = STOP;
     private MotorHttpGetTask task;
-    private final String DEFAULTURL = "http://192.168.11.24:8080/?action=stream";
+    private final String DEFAULTURL = "http://192.168.1.6:8080/?action=stream";
+    private TextView mDistanceText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         mButton_throw.setOnTouchListener(this);
 
         mControlText = (TextView) findViewById(R.id.control_text);
+        mDistanceText = (TextView) findViewById(R.id.distance_text);
     }
 
     @Override
@@ -89,12 +95,13 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
 
                     }
                 }
-                TaskCreate(state);
+                    TaskCreate(state);
                 break;
             case MotionEvent.ACTION_UP:
                 Log.d("onTouch", "plog STATE=STOP");
                 state = STOP;
                 TaskCreate(state);
+                GetDistance();
                 break;
         }
         return false;
@@ -104,6 +111,12 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         task = new MotorHttpGetTask(this);
         task.execute(state);
         mControlText.setText("STATE = "+state);
+    }
+
+    private void GetDistance(){
+        Log.d("Distance", "GetDistance()");
+        DistanceHttpGetTask distanceTask = new DistanceHttpGetTask(this,mDistanceText);
+        distanceTask.execute();
     }
 
     private void StartStream(MjpegView viewer){
