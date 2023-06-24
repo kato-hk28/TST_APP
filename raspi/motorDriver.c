@@ -9,19 +9,24 @@
 #define SERVO_right1 22
 #define SERVO_left0 23
 #define SERVO_left1 24
+#define SERVO_shot 8
+#define SERVO_set 9
 
 #define action_FORWARD 0
 #define action_BACKWARD 1
 #define action_LEFT 2
 #define action_RIGHT 3
 #define action_STOP 4
+#define action_THROW 5
+
+#define sleep_time 2
 
 
 int main(int argc, char *argv[]) {
 
     // 引数はActionの番号のみ
     if (argc < 2) {
-      printf("Usage: %s FORWARD(0)/BACKWARD(1)/LEFT(2)/RIGHT(3)/STOP(4)\n", argv[0]);
+      printf("Usage: %s FORWARD(0)/BACKWARD(1)/LEFT(2)/RIGHT(3)/STOP(4)/THROW(5)\n", argv[0]);
 		  return -1;
 	  }
     // wiringPiのセットアップ
@@ -32,9 +37,9 @@ int main(int argc, char *argv[]) {
 
     int action_state = atoi(argv[1]);
 
-    // Actionは前/後/左/右/停止/の4パターン
-    if (action_state > 4) {
-      printf("Error: action should be (0,1,2,3,4)\n");
+    // Actionは前/後/左/右/停止/投擲の5パターン
+    if (action_state > 5) {
+      printf("Error: action should be (0,1,2,3,4,5)\n");
 		  return -1;
 	  }
 
@@ -43,11 +48,15 @@ int main(int argc, char *argv[]) {
     pinMode(SERVO_right1, OUTPUT);
     pinMode(SERVO_left0, OUTPUT);
     pinMode(SERVO_left1, OUTPUT);
+    pinMode(SERVO_set, OUTPUT);
+    pinMode(SERVO_shot, OUTPUT);
     // すべてのGPIOピンを初期化
     digitalWrite(SERVO_right0, 0);
     digitalWrite(SERVO_right1, 0);
     digitalWrite(SERVO_left0, 0);
     digitalWrite(SERVO_left1, 0);
+    digitalWrite(SERVO_set, 0);
+    digitalWrite(SERVO_shot, 0);
 
     switch (action_state)
     {
@@ -92,6 +101,20 @@ int main(int argc, char *argv[]) {
       digitalWrite(SERVO_left0, 0);
       digitalWrite(SERVO_left1, 0);
       printf("ACTION_STOP\n");
+      break;
+    case action_THROW:
+      //停止後、投擲
+      digitalWrite(SERVO_right0, 0);
+      digitalWrite(SERVO_right1, 0);
+      digitalWrite(SERVO_left0, 0);
+      digitalWrite(SERVO_left1, 0);
+
+      digitalWrite(SERVO_shot, 1);
+      sleep(sleep_time);
+      digitalWrite(SERVO_shot, 0);
+      digitalWrite(SERVO_set, 1);
+      sleep(sleep_time);
+      digitalWrite(SERVO_set, 0);
       break;
     default:
       printf("Nothing\n");
