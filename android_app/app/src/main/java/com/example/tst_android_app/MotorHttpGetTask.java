@@ -13,7 +13,7 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     private final Activity mParentActivity;
     //private final String DEFAULTUAL = "http://192.168.1.89/~pi/motorDriver.php?";
-    private final String DEFAULTUAL = "http://192.168.11.24" +
+    private final String DEFAULTUAL = "http://192.168.1.6" +
             "" +
             "/~pi/motorDriver.php?";
     private String uri = null;
