@@ -83,7 +83,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
                         Log.d("onTouch", "plog STATE=STOP");
                         state = STOP;
                     } else if (v.getId() == R.id.throw_button) {
-                        Log.d("onTouch", "plog STATE=STOP");
+                        Log.d("onTouch", "plog STATE=THROW");
                         state = THROW;
                     } else {
 
