@@ -12,9 +12,7 @@ import java.net.URL;
 public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     private final Activity mParentActivity;
-    private String DEFAULTUAL = "http://192.168.32.152" +
-            "" +
-            "/~pi/motorDriver.php?";
+    private String DEFAULTUAL = "";
     private String uri = null;
     String mip_address = "";
     private ProgressDialog mDialog = null;
@@ -35,7 +33,6 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
     //メイン処理
     @Override
     protected Void doInBackground(Integer... arg0){
-        Log.d("MotorHttpGetTask", "wlog doInBackground()");
         //実行するURLスクリプト
         uri = DEFAULTUAL + "state=" + arg0[0].toString();
         exec_get();
@@ -45,18 +42,15 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
     //タスク終了時
     @Override
     protected void onPostExecute(Void result){
-        Log.d("MotorHttpGetTask", "wlog onPostExecute()");
 //        mDialog.dismiss();
     }
 
     private String exec_get(){
-        Log.d("MotorHttpGetTask", "wlog exec_get()");
         HttpURLConnection http = null;
         InputStream in = null;
         String src = new String();
 
         try{
-            Log.d("MotorHttpGetTask", "in try");
             // URLにHTTP接続
             URL url = new URL(uri);
             http = (HttpURLConnection) url.openConnection();
