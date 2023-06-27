@@ -72,7 +72,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         mButton_stop.setOnTouchListener(this);
         mButton_throw.setOnTouchListener(this);
 
-        mControlText = (TextView) findViewById(R.id.control_text);
+//        mControlText = (TextView) findViewById(R.id.control_text);
         mDistanceText = (TextView) findViewById(R.id.distance_text);
     }
 
@@ -123,7 +123,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     private void TaskCreate(int state){
         task = new MotorHttpGetTask(this, ip_address);
         task.execute(state);
-        mControlText.setText("STATE = "+state);
+//        mControlText.setText("STATE = "+state);
     }
 
     private DistanceHttpGetTask GetDistance(){
