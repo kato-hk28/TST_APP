@@ -51,6 +51,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         mv = (MjpegView) findViewById(R.id.mjpegview);
         StartStream(mv);
 
+//        IPアドレスをうけとる場合
 //        // String型の値を受けとる
 //        Intent intent = getIntent();
 //        ip_address = intent.getStringExtra("ip_address");

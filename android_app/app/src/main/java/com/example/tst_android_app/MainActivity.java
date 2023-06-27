@@ -17,14 +17,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText et = (EditText) findViewById(R.id.ip_edit);
+//        IPアドレスをうけとる場合
+//        EditText et = (EditText) findViewById(R.id.ip_edit);
 
         Button ManualModeButton = (Button) findViewById(R.id.manual_button);
         ManualModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("main", "plog manual_button onClick");
-                ip_address = et.getText().toString();
+
+//                IPアドレスをうけとる場合
+//                ip_address = et.getText().toString();
 
                 Intent intent = new Intent(getApplicationContext(), Manual_Activity.class);
                 startActivity(intent);
