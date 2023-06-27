@@ -27,12 +27,14 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
     private Activity mParentActivity;
     private ProgressDialog mDialog = null;
     private String distance;
+    private String DEFAULTUAL = "";
     private Handler handler = new Handler();
 
 
-    public DistanceHttpGetTask(Activity parentActivity, TextView textView){
+    public DistanceHttpGetTask(Activity parentActivity, TextView textView, String ip){
         this.mParentActivity = parentActivity;
         this.mTextView = textView;
+        DEFAULTUAL = "http://" + ip + "/~pi/motorDriver.php?";
     }
 
     @Override
@@ -93,9 +95,8 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
         InputStream inputStream;
         String result = "";
         String str = "";
-
         try {
-            URL url = new URL("http://192.168.32.152/~pi/distance_sensor.php");
+            URL url = new URL(DEFAULTUAL);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
