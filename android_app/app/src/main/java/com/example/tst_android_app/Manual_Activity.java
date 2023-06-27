@@ -35,7 +35,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     public static int THROW = 5;
     private int state = STOP;
     private MotorHttpGetTask task;
-    private String DEFAULTURL = "http://192.168.32.152:8080/?action=stream";
+    private String DEFAULTURL = "http://192.168.11.24:8080/?action=stream";
     private TextView mDistanceText;
     private DistanceHttpGetTask distanceTask;
 
@@ -51,11 +51,11 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         mv = (MjpegView) findViewById(R.id.mjpegview);
         StartStream(mv);
 
-        // String型の値を受けとる
-        Intent intent = getIntent();
-        ip_address = intent.getStringExtra("ip_address");
-
-        DEFAULTURL = "http://" + ip_address + ":8080/?action=stream";
+//        // String型の値を受けとる
+//        Intent intent = getIntent();
+//        ip_address = intent.getStringExtra("ip_address");
+//
+//        DEFAULTURL = "http://" + ip_address + ":8080/?action=stream";
 
         // ボタンの定義してonClick, onLongClickListenerをつける
         mButton_forwrd = (ImageButton) findViewById(R.id.forward_button);
@@ -121,14 +121,14 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     }
 
     private void TaskCreate(int state){
-        task = new MotorHttpGetTask(this, ip_address);
+        task = new MotorHttpGetTask(this);
         task.execute(state);
 //        mControlText.setText("STATE = "+state);
     }
 
     private DistanceHttpGetTask GetDistance(){
         Log.d("Distance", "GetDistance()");
-        DistanceHttpGetTask distanceTask = new DistanceHttpGetTask(this,mDistanceText, ip_address);
+        DistanceHttpGetTask distanceTask = new DistanceHttpGetTask(this,mDistanceText);
         distanceTask.execute();
         return distanceTask;
     }

@@ -27,11 +27,15 @@ public class MainActivity extends AppCompatActivity {
                 ip_address = et.getText().toString();
 
                 Intent intent = new Intent(getApplicationContext(), Manual_Activity.class);
-
-                // Stringの値を渡す
-                intent.putExtra("ip_address", ip_address);
-
                 startActivity(intent);
+//                if(et.getText().toString().isEmpty()) {
+//                    et.setError("Input IP address!");
+//                }else{
+//                    // Stringの値を渡す
+//                    intent.putExtra("ip_address", ip_address);
+//
+//                    startActivity(intent);
+//                }
             }
         });
     }

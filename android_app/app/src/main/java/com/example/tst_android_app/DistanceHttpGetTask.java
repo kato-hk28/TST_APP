@@ -27,14 +27,13 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
     private Activity mParentActivity;
     private ProgressDialog mDialog = null;
     private String distance;
-    private String DEFAULTUAL = "";
+    private String DEFAULTUAL = "http://192.168.11.24/~pi/motorDriver.php?";
+    private String mIP = "";
     private Handler handler = new Handler();
 
-
-    public DistanceHttpGetTask(Activity parentActivity, TextView textView, String ip){
+    public DistanceHttpGetTask(Activity parentActivity, TextView textView){
         this.mParentActivity = parentActivity;
         this.mTextView = textView;
-        DEFAULTUAL = "http://" + ip + "/~pi/motorDriver.php?";
     }
 
     @Override

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TST_Android_APP</string>
+    <string name="app_name">ホッパー君</string>
     <string name="auto_button">自動操縦モード</string>
     <string name="manual_button">手動操縦モード</string>
     <string name="forward_button">前</string>

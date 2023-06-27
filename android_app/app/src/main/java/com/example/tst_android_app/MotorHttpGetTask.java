@@ -12,13 +12,13 @@ import java.net.URL;
 public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     private final Activity mParentActivity;
-    private String DEFAULTUAL = "";
+    private String DEFAULTUAL = "http://192.168.11.24/~pi/motorDriver.php?";
+    private String mIP = "";
     private String uri = null;
     String mip_address = "";
     private ProgressDialog mDialog = null;
-    public MotorHttpGetTask(Activity mParentActivity, String ip) {
+    public MotorHttpGetTask(Activity mParentActivity) {
         this.mParentActivity = mParentActivity;
-        DEFAULTUAL = "http://" + ip + "" + "/~pi/motorDriver.php?";
     }
     //タスク開始時
     @Override
