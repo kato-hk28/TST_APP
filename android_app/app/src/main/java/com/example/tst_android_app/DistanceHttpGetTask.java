@@ -3,7 +3,9 @@ package com.example.tst_android_app;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
     private Activity mParentActivity;
     private ProgressDialog mDialog = null;
     private String distance;
+    private Handler handler = new Handler();
 
 
     public DistanceHttpGetTask(Activity parentActivity, TextView textView){
@@ -34,15 +37,30 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPreExecute(){
-        Log.d("Distance", "onPreExecute");
         mDialog = new ProgressDialog(mParentActivity);
         mDialog.setMessage("");
-        mDialog.show();
+//        mDialog.show();
     }
 
     @Override
     protected String doInBackground(Void... voids) {
-        return exec_get();
+        String ret;
+        for(int i=0; i<1000; i++) {
+            if(i%10 != 0) continue;
+            Log.d("Distance", String.valueOf(i));
+            if(isCancelled()){
+                break;
+            }
+            ret = exec_get();
+            String finalRet = ret;
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mTextView.setText(finalRet);
+                }
+            });
+        }
+        return "";
     }
 
     @Override
@@ -56,7 +74,6 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         this.mTextView.setText(distance);
-        Log.d("Distance", distance);
     }
 
     private String exec_get() {
@@ -65,10 +82,8 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
         String result = "";
         String str = "";
 
-        Log.d("WebSample", "get API");
-
-        try{
-            URL url = new URL("http://192.168.1.6/~pi/distance_sensor.php");
+        try {
+            URL url = new URL("http://192.168.32.144/~pi/distance_sensor.php");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
@@ -78,24 +93,22 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
             urlConnection.setDoOutput(false);
             urlConnection.setDoInput(true);
 
-            Log.d("Distance", "set up is done.");
-
             urlConnection.connect();
 
             int statusCode = urlConnection.getResponseCode();
-            if(statusCode == 200){
+            if (statusCode == 200) {
                 inputStream = urlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
                 result = bufferedReader.readLine();
-                while(result != null){
+                while (result != null) {
                     str += result;
                     result = bufferedReader.readLine();
                 }
                 bufferedReader.close();
             }
-        }catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return str;

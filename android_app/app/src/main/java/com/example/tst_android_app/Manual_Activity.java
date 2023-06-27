@@ -33,8 +33,9 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     public static int THROW = 5;
     private int state = STOP;
     private MotorHttpGetTask task;
-    private final String DEFAULTURL = "http://192.168.1.6:8080/?action=stream";
+    private final String DEFAULTURL = "http://192.168.32.144:8080/?action=stream";
     private TextView mDistanceText;
+    private DistanceHttpGetTask distanceTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +70,12 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.d("onTouch", "plog onTouchEvent is called.");
+//        Log.d("onTouch", "plog onTouchEvent is called.");
         switch(event.getAction() & MotionEvent.ACTION_MASK){
             case MotionEvent.ACTION_DOWN:
+                if(distanceTask != null){
+                    distanceTask.cancel(true);
+                }
                 if (event.getPointerCount() == 1) {
                     if (v.getId() == R.id.forward_button) {
                         Log.d("onTouch", "plog STATE=FORWARD");
@@ -95,13 +99,14 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
 
                     }
                 }
-                    TaskCreate(state);
+                TaskCreate(state);
+                distanceTask = GetDistance();
                 break;
             case MotionEvent.ACTION_UP:
                 Log.d("onTouch", "plog STATE=STOP");
+                distanceTask.cancel(true);
                 state = STOP;
                 TaskCreate(state);
-                GetDistance();
                 break;
         }
         return false;
@@ -113,10 +118,11 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         mControlText.setText("STATE = "+state);
     }
 
-    private void GetDistance(){
+    private DistanceHttpGetTask GetDistance(){
         Log.d("Distance", "GetDistance()");
         DistanceHttpGetTask distanceTask = new DistanceHttpGetTask(this,mDistanceText);
         distanceTask.execute();
+        return distanceTask;
     }
 
     private void StartStream(MjpegView viewer){
