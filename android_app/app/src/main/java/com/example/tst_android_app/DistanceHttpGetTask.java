@@ -46,17 +46,29 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... voids) {
         String ret;
         for(int i=0; i<1000; i++) {
-            if(i%10 != 0) continue;
             Log.d("Distance", String.valueOf(i));
-            if(isCancelled()){
+            if(isCancelled() && i > 0){
                 break;
             }
             ret = exec_get();
             String finalRet = ret;
+            Float floatRet = Float.valueOf(finalRet);
+            String command = "";
+            if(floatRet > 30){
+                command = "近づけ！("+finalRet+" cm)";
+            }
+            else if(floatRet < 20){
+                command = "離れろ！("+finalRet+" cm)";
+            }
+            else{
+                command = "撃て！("+finalRet+" cm)";
+            }
+            String finalCommand = command;
+            Log.d("Distance", finalCommand);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mTextView.setText(finalRet);
+                    mTextView.setText(finalCommand);
                 }
             });
         }
@@ -83,7 +95,7 @@ public class DistanceHttpGetTask extends AsyncTask<Void, Void, String> {
         String str = "";
 
         try {
-            URL url = new URL("http://192.168.32.144/~pi/distance_sensor.php");
+            URL url = new URL("http://192.168.32.152/~pi/distance_sensor.php");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
