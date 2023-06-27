@@ -7,21 +7,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    String ip_address="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        EditText et = (EditText) findViewById(R.id.ip_edit);
 
         Button ManualModeButton = (Button) findViewById(R.id.manual_button);
         ManualModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("main", "plog manual_button onClick");
+                ip_address = et.getText().toString();
+
                 Intent intent = new Intent(getApplicationContext(), Manual_Activity.class);
+
+                // Stringの値を渡す
+                intent.putExtra("ip_address", ip_address);
+
                 startActivity(intent);
             }
         });
