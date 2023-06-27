@@ -1,5 +1,6 @@
 package com.example.tst_android_app;
 
+import android.content.Intent;
 import android.graphics.Camera;
 import android.os.Bundle;
 import android.os.TestLooperManager;
@@ -25,6 +26,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     private ImageButton mButton_forwrd, mButton_backward, mButton_left, mButton_right, mButton_stop, mButton_throw;
     private TextView mControlText;
     private MjpegView mv;
+    String ip_address = "";
     public static int FORWARD = 0;
     public static int BACKWARD = 1;
     public static int LEFT = 2;
@@ -33,7 +35,7 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     public static int THROW = 5;
     private int state = STOP;
     private MotorHttpGetTask task;
-    private final String DEFAULTURL = "http://192.168.32.144:8080/?action=stream";
+    private String DEFAULTURL = "http://192.168.32.152:8080/?action=stream";
     private TextView mDistanceText;
     private DistanceHttpGetTask distanceTask;
 
@@ -48,6 +50,12 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
         //ラズパイ上のカメラからStream配信を取得
         mv = (MjpegView) findViewById(R.id.mjpegview);
         StartStream(mv);
+
+        // String型の値を受けとる
+        Intent intent = getIntent();
+        ip_address = intent.getStringExtra("ip_address");
+
+        DEFAULTURL = "http://" + ip_address + ":8080/?action=stream";
 
         // ボタンの定義してonClick, onLongClickListenerをつける
         mButton_forwrd = (ImageButton) findViewById(R.id.forward_button);
@@ -113,14 +121,14 @@ public class Manual_Activity extends AppCompatActivity implements View.OnTouchLi
     }
 
     private void TaskCreate(int state){
-        task = new MotorHttpGetTask(this);
+        task = new MotorHttpGetTask(this, ip_address);
         task.execute(state);
         mControlText.setText("STATE = "+state);
     }
 
     private DistanceHttpGetTask GetDistance(){
         Log.d("Distance", "GetDistance()");
-        DistanceHttpGetTask distanceTask = new DistanceHttpGetTask(this,mDistanceText);
+        DistanceHttpGetTask distanceTask = new DistanceHttpGetTask(this,mDistanceText, ip_address);
         distanceTask.execute();
         return distanceTask;
     }
