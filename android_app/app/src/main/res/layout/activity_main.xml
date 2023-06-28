@@ -28,17 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--        <Button-->
-        <!--            android:id="@+id/auto_button"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_margin="5dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:autoSizeTextType="uniform"-->
-        <!--            app:backgroundTint="@null"-->
-        <!--            android:background="@drawable/partsdesign"-->
-        <!--            android:text="@string/auto_button" />-->
-
         <Button
             android:id="@+id/manual_button"
             android:layout_width="match_parent"
@@ -53,20 +42,6 @@
 
     </LinearLayout>
     
-<!--IPアドレスを入力して受け取るばあい-->
-<!--    <EditText-->
-<!--        android:id="@+id/ip_edit"-->
-<!--        android:layout_width="441dp"-->
-<!--        android:layout_height="61dp"-->
-<!--        android:ems="10"-->
-<!--        android:inputType="phone"-->
-<!--        android:autoSizeTextType="uniform"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.862" />-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

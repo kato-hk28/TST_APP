@@ -2,9 +2,21 @@
 * .phpファイルは　~/pi/public_html 直下へ配置
 * start_stream.sh は /home/pi/home/pi/mjpg-streamer/mjpg-streamer-experimental 直下へ配置
 
-# USAGE:compile
-` gcc -lwiringPi -o motorDriver motorDriver.c `  
-` sudo ./motorDriver 0 `  
+# modotDriver USAGE
+```
+ cd raspi
+ gcc -lwiringPi -o motorDriver motorDriver.c
+ sudo ./motorDriver 0
+```
+引数としてstate numberを入力することでモーターを制御する。  
+| state number | Action |
+|:-----------:|:------------:|
+| 0  | 前進 |
+| 1  | 後退 |
+| 2  | 左旋回 |
+| 3  | 右旋回 |
+| 4  | 停止 |
+| 5  | 投てき |
 
 ## USAGE:RasPi Cameraとmjpg_streamer
 Raspberry Pi Camera の映像をWeb配信できるアプリケーション  

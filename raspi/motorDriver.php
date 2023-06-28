@@ -3,7 +3,7 @@ ADDRESS,PASSWORDを適切な値に変更する -->
 
 <?php
 define("MOTOR", "/usr/bin/sudo /home/pi/TST_APP/raspi/motorDriver");
-define("ADDRESS", $_GET["ip"]);
+define("ADDRESS", "127.0.0.1");
 define("USER","pi");
 define("PASSWORD","co+in-345st");
 

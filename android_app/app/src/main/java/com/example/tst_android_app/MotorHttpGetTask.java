@@ -13,12 +13,11 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     private final Activity mParentActivity;
     private String DEFAULTUAL = "http://192.168.11.24/~pi/motorDriver.php?";
-    private String mIP = "";
     private String uri = null;
-    String mip_address = "";
     private ProgressDialog mDialog = null;
-    public MotorHttpGetTask(Activity mParentActivity) {
+    public MotorHttpGetTask(Activity mParentActivity, String ip) {
         this.mParentActivity = mParentActivity;
+        this.DEFAULTUAL = "http://" + ip + "/~pi/motorDriver.php?";
     }
     //タスク開始時
     @Override
@@ -28,7 +27,6 @@ public class MotorHttpGetTask extends AsyncTask<Integer, Void, Void> {
 //        mDialog.setMessage("通信中・・・");
 //        mDialog.show();
     }
-
 
     //メイン処理
     @Override
