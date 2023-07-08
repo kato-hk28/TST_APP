@@ -9,8 +9,8 @@
 #define SERVO_right1 22
 #define SERVO_left0 23
 #define SERVO_left1 24
-#define SERVO_shot 8
-#define SERVO_set 9
+#define SERVO_shot 2
+#define SERVO_set 3
 
 #define action_FORWARD 0
 #define action_BACKWARD 1
@@ -88,8 +88,8 @@ int main(int argc, char *argv[]) {
     case action_RIGHT:
       // 右旋回
       // 左のモーターのみを動かす（または左モーター正回転,右モーター負回転）
-      digitalWrite(SERVO_right0, 1);
-      digitalWrite(SERVO_right1, 0);
+      digitalWrite(SERVO_right0, 0);
+      digitalWrite(SERVO_right1, 1);
       digitalWrite(SERVO_left0, 1);
       digitalWrite(SERVO_left1, 0);
       printf("ACTION_RIGHT\n");
